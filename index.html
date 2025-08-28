@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Notas de Venda - Agronorte</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>🛒 Sistema de Notas de Venda</h1>
+                    <p>Adicione produtos e calcule o total automaticamente</p>
+                </div>
+                <div class="header-right">
+                    <span id="user-info" class="user-info"></span>
+                    <button id="logout-btn" class="logout-btn">Sair</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Campo para nome do cliente -->
+            <section class="customer-section">
+                <h2>Informações da Venda</h2>
+                <div class="form-group">
+                    <label for="nome-cliente">Nome do Cliente (opcional):</label>
+                    <input type="text" id="nome-cliente" name="nome-cliente" placeholder="Digite o nome do cliente">
+                </div>
+                <div class="form-group">
+                    <label for="forma-pagamento">Forma de Pagamento:</label>
+                    <select id="forma-pagamento" name="forma-pagamento" class="form-control">
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Pix">Pix</option>
+                        <option value="Cartao de Credito">Cartão de Crédito</option>
+                        <option value="Cartao de Debito">Cartão de Débito</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Formulário para adicionar produtos -->
+            <section class="add-product-section">
+                <h2>Adicionar Produto</h2>
+                <form id="product-form" class="product-form">
+                    <div class="form-group">
+                        <label for="nome-produto">Nome do Produto:</label>
+                        <input type="text" id="nome-produto" name="nome-produto" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade:</label>
+                            <div class="quantity-input-group">
+                                <input type="number" id="quantidade" name="quantidade" min="0.1" step="0.1" value="1" required>
+                                <select id="tipo-quantidade" name="tipo-quantidade" class="quantity-type-select">
+                                    <option value="unidade">Unid.</option>
+                                    <option value="kg">Kg</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preco-unitario">Preço Unitário (R$):</label>
+                            <input type="number" id="preco-unitario" name="preco-unitario" min="0.01" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+                </form>
+            </section>
+
+            <!-- Lista de produtos -->
+            <section class="products-section">
+                <h2>Produtos na Venda</h2>
+                <div id="products-list" class="products-list">
+                    <p class="empty-message">Nenhum produto adicionado ainda.</p>
+                </div>
+            </section>
+
+            <!-- Total e ações -->
+            <section class="total-section">
+                <div class="total-display">
+                    <h3>Total: R$ <span id="total-value">0,00</span></h3>
+                </div>
+                
+                <div class="actions">
+                    <button id="clear-sale" class="btn btn-secondary">Limpar Venda</button>
+                    <button id="finish-sale" class="btn btn-success">Finalizar Venda</button>
+                </div>
+            </section>
+
+            <!-- Histórico de vendas -->
+            <section class="history-section">
+                <h2>Histórico de Vendas</h2>
+                <div id="sales-history" class="sales-history">
+                    <p class="empty-message">Nenhuma venda finalizada ainda.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Confirmar Ação</h3>
+            <p id="modal-message">Tem certeza que deseja realizar esta ação?</p>
+            <div class="modal-actions">
+                <button id="modal-cancel" class="btn btn-secondary">Cancelar</button>
+                <button id="modal-confirm" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts externos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode.js/1.0.0/qrcode.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    <!-- Script principal - carregado por último -->
+    <script src="./script.js"></script>
+</body>
+</html>
